@@ -1,0 +1,25 @@
+pipeline {
+    agent {label "jenkins-node"}
+    stages{
+        stage('Status Page Incident Creation') {
+            steps {
+                dir('/root/') {
+                    sh '''
+                    ./status_page.py "$Incident" "$Infrastructure"
+                    '''
+                }
+            }
+        }
+    }
+    post {
+        success {
+            emailext subject: 'Incident Management for P1 Outage',
+                 body: 'Issue: $Incident for the component $Infrastructure', 
+                recipientProviders: [
+                            [$class: 'DevelopersRecipientProvider'],
+                            [$class: 'RequesterRecipientProvider']
+                        ], 
+                 to: '$Email'
+        }
+    }
+}
