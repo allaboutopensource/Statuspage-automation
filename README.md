@@ -9,4 +9,4 @@ Incidents are the best way to communicate with your customers during downtime.
 
 This workflow is to create incident on the statuspage via jenkins pipeline using the string parameter. 
 
-jenkins pipeline string parameters are : "Incident" and "Infrastructure"
+jenkins pipeline string parameters are : "Incident", "Infrastructure" and "Email"
